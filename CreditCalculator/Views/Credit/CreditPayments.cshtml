@@ -1,0 +1,28 @@
+﻿@model CreditCalculator.ViewModels.CreditPaymentsViewModel
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Номер платежа</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Общий платеж</th>
+      <th scope="col">Тело</th>
+      <th scope="col">Проценты</th>
+      <th scope="col">Остаток</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var payment in Model.CreditPayments)
+        {
+            <tr>
+            <td>@payment.Number</td>
+            <td>@payment.Payday.ToString("dd/MM/yyyy")</td>
+            <td>@Math.Round(payment.TotalPayment, 2)</td>
+            <td>@Math.Round(payment.BodyPayment, 2)</td>
+            <td>@Math.Round(payment.PercentPayment, 2)</td>
+            <td>@Math.Round(payment.Remainder, 2)</td>
+            </tr>
+        }
+  </tbody>
+</table>
+<p class="text-center">Суммарная переплата: @Math.Round(Model.TotalOverpayment, 2) рублей</p>
